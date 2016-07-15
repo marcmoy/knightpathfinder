@@ -33,7 +33,6 @@ class KnightPathFinder
     moves
   end
 
-  #receives position coordinates, returns false if is off board
   def self.is_on_board?(pos)
     x, y = pos
     x.between?(0, 7) && y.between?(0, 7)
@@ -52,9 +51,7 @@ class KnightPathFinder
 
     until queue.empty?
       parent = queue.shift
-
-      children = new_move_positions(parent.value) #parent.value = pos(Array)
-
+      children = new_move_positions(parent.value)
 
       children.each do |child_pos|
         child = PolyTreeNode.new(child_pos)
@@ -66,5 +63,27 @@ class KnightPathFinder
     root
   end
 
+  def find_path(end_pos) #using dfs
+    trace_path_back(root.bfs(end_pos))
+  end
 
+  def trace_path_back(end_node)
+    moves = []
+    current_node = end_node
+
+    loop do
+      moves << current_node.value
+      current_node = current_node.parent
+      break if current_node.parent.nil?
+    end
+
+    moves << start_pos
+    moves.reverse
+  end
+
+end
+
+if __FILE__ == $PROGRAM_NAME
+  k = KnightPathFinder.new([0,0])
+  p k.find_path([6,2])
 end
