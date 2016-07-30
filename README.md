@@ -1,6 +1,6 @@
 # KnightPathFinder
 
-Created a program to generate the path to travel a knight to an end position from its starting position.
+Created a program to generate the path to travel a knight to an end position from its starting position on a chess board.
 
 Here are some example paths:
 
